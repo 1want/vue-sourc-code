@@ -9,7 +9,22 @@
   <body>
     <script src="/bundle.js"></script>
     <script>
-      var template = '我买了一个{{thing}},好{{mood}}啊'
+      var template = `
+      <div>
+        <ol>
+          {{#students}}
+          <li>
+            学生{{item.name}}的爱好是
+            <ol>
+              {{#item.hobbies}}
+              <li>{{.}}</li>
+              {{/item.hobbies}}
+            </ol>
+          </li>
+          {{/students}}
+        </ol>
+      </div>
+      `
       var data = {}
       mustache.render(template, data)
     </script>

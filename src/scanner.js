@@ -11,7 +11,7 @@ export default class Scanner {
 
   scan(tag) {
     // 跳过所有{{
-    while (this.tail.indexOf(tag) === 0 && this.tail != '') {
+    while (this.eos() && this.tail.indexOf(tag) === 0) {
       this.cur += tag.length
       this.tail = this.template.substring(this.cur)
     }
@@ -21,10 +21,13 @@ export default class Scanner {
     // 因为substring不会改变原字符，所以不能直接截取this.tail
 
     // 当this.tail.indexOf(stop) === 0时，代表{{在第一位
-    while (this.tail.indexOf(stop) != 0 && this.tail != '') {
+    while (this.eos() && this.tail.indexOf(stop) != 0) {
       this.cur++
       this.tail = this.template.substring(this.cur)
     }
     return this.template.substring(first, this.cur)
+  }
+  eos() {
+    return this.tail != ''
   }
 }

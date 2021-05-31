@@ -1,30 +1,18 @@
-import Scanner from './scanner'
-import formatToken from './formatToken'
+import parseTemplateToTokens from './parseTemplateToTokens'
+import renderTemplate from './renderTemplate'
+import lookup from './lookup'
 
 window.mustache = {
-  render(template) {
-    var scanner = new Scanner(template)
-    let world
-    const tokens = []
-    while (scanner.eos()) {
-      world = scanner.scanUtil('{{')
-      if (world != '') {
-        tokens.push(['text', world])
-      }
-      scanner.scan('{{')
-
-      world = scanner.scanUtil('}}')
-      if (world != '') {
-        if (world[0] === '#') {
-          tokens.push(['#', world.substring(1)])
-        } else if (world[0] === '/') {
-          tokens.push(['/', world.substring(1)])
-        } else {
-          tokens.push(['text', world])
+  render(template, data) {
+    let tokens = parseTemplateToTokens(template)
+    renderTemplate(tokens, data)
+    const obj = {
+      a: {
+        b: {
+          c: 100
         }
       }
-      scanner.scan('}}')
     }
-    return formatToken(tokens)
+    lookup(obj, 'a.b.c')
   }
 }

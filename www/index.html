@@ -9,23 +9,26 @@
   <body>
     <script src="/bundle.js"></script>
     <script>
-      var template = `
-      <div>
-        <ol>
-          {{#students}}
-          <li>
-            学生{{item.name}}的爱好是
-            <ol>
-              {{#item.hobbies}}
-              <li>{{.}}</li>
-              {{/item.hobbies}}
-            </ol>
-          </li>
-          {{/students}}
-        </ol>
-      </div>
-      `
-      var data = {}
+      // var template = `
+      // <div>
+      //   <ol>
+      //     {{#students}}
+      //     <li>
+      //       学生{{name}}的爱好是
+      //       <ol>
+      //         {{#hobbies}}
+      //         <li>{{.}}</li>
+      //         {{/hobbies}}
+      //       </ol>
+      //     </li>
+      //     {{/students}}
+      //   </ol>
+      // </div>
+      // `
+      var template = '我叫{{msg}},{{msg}}今年18'
+      var data = {
+        msg: 'jack'
+      }
       mustache.render(template, data)
     </script>
   </body>

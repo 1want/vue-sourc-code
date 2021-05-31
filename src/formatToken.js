@@ -25,6 +25,5 @@ export default tokens => {
         collect.push(token)
     }
   })
-
-  console.log(endToken)
+  return endToken
 }

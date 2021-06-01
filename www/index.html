@@ -6,30 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <script src="/bundle.js"></script>
+
   <body>
-    <script src="/bundle.js"></script>
-    <script>
-      // var template = `
-      // <div>
-      //   <ol>
-      //     {{#students}}
-      //     <li>
-      //       学生{{name}}的爱好是
-      //       <ol>
-      //         {{#hobbies}}
-      //         <li>{{.}}</li>
-      //         {{/hobbies}}
-      //       </ol>
-      //     </li>
-      //     {{/students}}
-      //   </ol>
-      // </div>
-      // `
-      var template = '我叫{{msg}},{{msg}}今年18'
-      var data = {
-        msg: 'jack'
-      }
-      mustache.render(template, data)
-    </script>
+    <div id="id"></div>
   </body>
+
+  <script>
+    // var template = `
+    // <div>
+    //   <ol>
+    //     {{#students}}
+    //     <li>
+    //       {{.}}
+    //     </li>
+    //     {{/students}}
+    //   </ol>
+    // </div>
+    // `
+
+    var template = `
+      <div>
+        <ul>
+        {{#students}}
+          <li>
+           <div class="hd">{{name}}的基本信息</div>
+           <div class="bd">
+            <p>姓名:{{name}}</p>
+            <p>年龄:{{age}}</p>
+            </div>
+          </li>
+        {{/students}}
+        </ul>
+      </div>
+      `
+    var data = {
+      students: [
+        { name: '小明', age: 12 },
+        { name: '小红', age: 18 },
+        { name: '小张', age: 19 }
+      ]
+    }
+    const str = mustache.render(template, data)
+    const id = document.getElementById('id')
+    id.innerHTML = str
+  </script>
 </html>

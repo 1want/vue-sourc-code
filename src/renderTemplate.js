@@ -1,3 +1,5 @@
+import parseArray from './parseArray'
+
 export default (token, data) => {
   let res = ''
   token.forEach(e => {
@@ -5,7 +7,9 @@ export default (token, data) => {
       res += e[1]
     } else if (e[0] === 'name') {
       res += data[e[1]]
+    } else if (e[0] === '#') {
+      res += parseArray(e, data)
     }
   })
-  console.log(res)
+  return res
 }

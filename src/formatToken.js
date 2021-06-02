@@ -1,4 +1,7 @@
-// collect引用了endToken的内存地址，所以所有操作都会影响到endToken
+/**
+ * collect引用了endToken的内存地址，所以所有操作都会影响到endToken
+ * 当碰到#开头的token时表示它有子元素，需要储存到sections中
+ */
 export default tokens => {
   const endToken = []
   const sections = []
@@ -7,7 +10,7 @@ export default tokens => {
     const token = e
     switch (token[0]) {
       case '#':
-        // 当首次把student压入栈时，改变collect的角色，让它成为student[student.length-1][2]这个角色
+        // 当首次把student压入栈时，改变collect的角色，让它成为student[student.length-1][2]这个角色，他们都被作为token添加到sections中
         // 此后的push操作都是在往student[2]的里面添加子内容
         // token[2]是往当前这项token['#','token']末尾再添加一个空数组用来存储子元素
         collect.push(token)
@@ -18,6 +21,9 @@ export default tokens => {
         sections.pop()
         // 首次出栈时检验sections是否还有内容，有内容就说明当前pop出去的是最尾栈
         // 需要将它添加到上一个栈的子元素内
+        // if (sections.length > 0) {
+        //   collect = sections[sections.length - 1][2]
+        // }
         collect =
           sections.length > 0 ? sections[sections.length - 1][2] : endToken
         break

@@ -23,16 +23,14 @@
   <body>
     <script>
       const arr = []
-      const newArr = arr
-      arr.some(e => {
-        if (e) {
-          console.log(e, 'ok')
-        } else {
-          arr.push(1)
-        }
-      })
+      let newArr = arr
 
-      console.log(arr)
+      const s = [1, 2, 3]
+      s.forEach(e => {
+        newArr = s[2] = []
+        newArr.push(e)
+        console.log(arr, newArr, s)
+      })
     </script>
   </body>
 </html>

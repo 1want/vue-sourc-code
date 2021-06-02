@@ -35,6 +35,13 @@
             <p>姓名:{{name}}</p>
             <p>年龄:{{age}}</p>
             </div>
+            {{#hobbies}}
+            <ul>
+              <li>
+                {{.}}
+              </li>
+            </ul>
+            {{/hobbies}}
           </li>
         {{/students}}
         </ul>
@@ -42,9 +49,9 @@
       `
     var data = {
       students: [
-        { name: '小明', age: 12 },
-        { name: '小红', age: 18 },
-        { name: '小张', age: 19 }
+        { name: '小明', age: 12, hobbies: ['swim', 'playGame'] },
+        { name: '小红', age: 18, hobbies: ['eat', 'play'] },
+        { name: '小张', age: 19, hobbies: ['sleep', 'playGame'] }
       ]
     }
     const str = mustache.render(template, data)

@@ -17,22 +17,9 @@ const patch = init([
 
 const container = document.getElementById('container')
 
-const vnode = h('div#container.two.classes', { on: { click: () => {} } }, [
-  h('span', { style: { fontWeight: 'bold' } }, 'This is bold'),
-  ' and this is just normal text',
-  h('a', { props: { href: '/foo' } }, "I'll take you places!")
+const p1 = h('ul', { class: { box: true } }, [
+  h('li', '苹果'),
+  h('li', '香蕉'),
+  h('a', { props: { href: 'http://www.baidu.com' } }, '百度')
 ])
-// Patch into empty DOM element – this modifies the DOM as a side effect
-patch(container, vnode)
-
-const newVnode = h('div#container.two.classes', { on: { click: () => {} } }, [
-  h(
-    'span',
-    { style: { fontWeight: 'normal', fontStyle: 'italic' } },
-    'This is now italic type'
-  ),
-  ' and this is still just normal text',
-  h('a', { props: { href: '/bar' } }, "I'll take you places!")
-])
-// Second `patch` invocation
-patch(vnode, newVnode) // Snabbdom efficiently updates the old view to the new state
+patch(container, p1)

@@ -15,7 +15,6 @@ export default function (sel, data, c) {
     })
     return vnode(sel, data, children, undefined, undefined)
   } else if (typeof c === 'object' && c.hasOwnProperty('sel')) {
-    console.log(c)
     let children = [c]
     return vnode(sel, data, children, undefined, undefined)
   }

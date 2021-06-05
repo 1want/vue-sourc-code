@@ -1,9 +1,7 @@
 import h from './snabbdom/h'
+import patch from './snabbdom/patch'
 
-const p1 = h('ul', {}, [
-  h('li', {}, '苹果'),
-  h('li', {}, '香蕉'),
-  h('li', {}, [h('span', {}, 'A'), h('span', {}, 'B')])
-])
+const p = h('h1', {}, 'hello')
+const container = document.getElementById('container')
 
-// console.log(p1)
+patch(container, p)

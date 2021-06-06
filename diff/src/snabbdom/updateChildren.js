@@ -22,6 +22,20 @@ export default function updateChildren(parentElm, oldVnode, newVnode) {
       patchVnode(oldStartVnode, newStartVnode)
       oldStartVnode = oldVnode[++oldStartIdx]
       newStartVnode = newVnode[++newStartIdx]
+    } else if (checkVnode(oldEndVnode, newEndVnode)) {
+      patchVnode(oldEndVnode, newEndVnode)
+      oldEndVnode = oldVnode[--oldEndIdx]
+      newEndVnode = newVnode[--newEndIdx]
+    } else if (checkVnode(oldStartVnode, newEndVnode)) {
+      patchVnode(oldStartVnode, newEndVnode)
+      parentElm.insertBefore(oldStartVnode.elm, newEndVnode.elm.nextSibling)
+      oldStartVnode = oldVnode[++oldStartIdx]
+      newEndVnode = oldVnode[--newEndIdx]
+    } else if (checkVnode(oldEndVnode, newStartVnode)) {
+      patchVnode(oldEndVnode, newStartVnode)
+      parentElm.insertBefore(oldEndVnode.elm, oldStartVnode.elm)
+      oldEndVnode = oldVnode[--oldEndIdx]
+      newStartVnode = oldVnode[++newStartIdx]
     }
   }
 }

@@ -1,21 +1,14 @@
 import { def } from './utils'
 
-const arrayMethods = Object.create(Array.prototype)
+const arrayMethod = Object.create(Array.prototype)
 
-export const methods = [
-  'push',
-  'pop',
-  'shift',
-  'unshift',
-  'splice',
-  'sort',
-  'reverse'
-]
+// export const methods = ['pop', 'shift', 'unshift', 'splice', 'sort', 'reverse']
+export const methods = []
 
 methods.forEach(item => {
-  const original = arrayMethods[item]
+  const original = arrayMethod[item]
   def(
-    arrayMethods,
+    arrayMethod,
     item,
     function () {
       original.apply(this, arguments)

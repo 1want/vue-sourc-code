@@ -1,17 +1,27 @@
 import observe from './observe'
+import Watcher from './Watcher'
 
-const obj = {
-  a: {
-    b: {
-      c: 222222
+let obj = {
+  a: 1,
+  b: {
+    c: {
+      d: 4
     }
   },
-  f: 333,
-  g: [1, 2, 3]
+  e: [22, 33, 44, 55]
 }
 
 observe(obj)
 
-obj.g.push(11)
+// new Watcher(obj, 'b.c.d', val => {
+//   console.log('watcher监听', val)
+// })
 
-console.log(obj.g)
+new Watcher(obj, 'a', val => {
+  console.log('watcher监听', val)
+})
+
+obj.a = 22
+// new Watcher(obj, "b.c.d", (val) => {
+//   console.log("watcher监听", val);
+// });

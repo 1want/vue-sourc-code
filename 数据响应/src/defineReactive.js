@@ -26,8 +26,9 @@ export default function defineReactive(data, key, value) {
 
     // getter  收集依赖
     get() {
-      console.log(`getter试图访问${key}属性 侦测中 `)
+      // console.log(`getter试图访问${key}属性 侦测中 `)
       // 收集依赖
+
       if (Dep.target) {
         dep.depend()
 
@@ -37,20 +38,18 @@ export default function defineReactive(data, key, value) {
           childOb.dep.depend()
         }
       }
-
       return value
     },
 
     // setter 触发依赖
     set(newValue) {
-      console.log(`setter试图改变${key}属性 侦测中`, newValue)
+      // console.log(`setter试图改变${key}属性 侦测中`, newValue)
 
       if (value === newValue) return
       value = newValue
 
       // 当设置了新值，新值也要被observe
       childOb = observe(newValue)
-
       // 触发依赖
       // 发布订阅模式，通知dep
       dep.notify()

@@ -25,13 +25,15 @@ export default class Dep {
     if (Dep.target) {
       this.addSub(Dep.target)
     }
+    // console.log(this.subs, 'depend')
   }
 
   // 通知更新
   notify() {
-    console.log('通知更新notify')
+    // console.log('通知更新notify')
     // 浅拷贝一份
     const subs = this.subs.slice()
+    console.log(subs, 'okoo')
     // 遍历
     for (let i = 0, l = subs.length; i < l; i++) {
       subs[i].update()

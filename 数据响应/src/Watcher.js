@@ -12,6 +12,7 @@ export default class Watcher {
     this.getter = parsePath(expression)
     this.callback = callback
     this.value = this.get()
+    this.name = expression
   }
 
   get() {
@@ -30,6 +31,7 @@ export default class Watcher {
   }
 
   update() {
+    console.log(this.name + '发生了改变')
     this.run()
   }
 
@@ -37,6 +39,7 @@ export default class Watcher {
     this.getAndInvoke(this.callback)
   }
   getAndInvoke(callback) {
+    // console.log(callback)
     const value = this.get()
     if (value !== this.value || typeof value === 'object') {
       const oldValue = this.value

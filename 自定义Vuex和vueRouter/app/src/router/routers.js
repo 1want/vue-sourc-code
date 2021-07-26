@@ -1,26 +1,32 @@
+// 参考资料
+// 1. https://www.bilibili.com/video/BV14y4y1C7F2
+// 2. http://www.dennisgo.cn/Articles/Vue/vueRouter.html
+// 3. https://github.com/louzhedong/blog/issues/119
+
 let Vue
 
 class Router {
   constructor(options) {
     this.routes = formatRouter(options.routes)
-    this.mode = options.mode
+    this.mode = options.mode || 'hash'
     this.current = '/'
     this._init()
   }
   _init() {
-    Vue.util.defineReactive(this, 'current')
-
     if (this.mode === 'hash') {
-      window.addEventListener('hashchange', function () {
+      window.addEventListener('hashchange', () => {
         this.current = window.location.hash.slice(1) || '/'
-        console.log(this.current)
       })
     } else {
-      window.addEventListener('popstate', function () {
-        this.current = window.location.hash.slice()
+      window.addEventListener('popstate', () => {
+        this.current = window.location.hash.slice(1)
       })
     }
+    Vue.util.defineReactive(this, 'current')
   }
+
+  push() {}
+  go() {}
 }
 
 Router.install = _Vue => {
@@ -70,4 +76,5 @@ function formatRouter(routes) {
     return prev
   }, {})
 }
+
 export default Router

@@ -18,7 +18,7 @@ const routes = [
 
 const router = new myRouter({
   routes,
-  mode: 'hash'
+  mode: 'history'
 })
 
 export default router

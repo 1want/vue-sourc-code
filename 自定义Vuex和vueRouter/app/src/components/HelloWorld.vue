@@ -1,5 +1,12 @@
 <template>
-  <div @click="goAbout">home</div>
+  <div>
+    <span @click="goAbout">home</span>
+    <p>
+      {{ $store.state.num }}
+    </p>
+    <button @click="$store.commit('add', 2)">mutations</button>
+    <button @click="$store.dispatch('add', 20)">actions</button>
+  </div>
 </template>
 
 <script>

@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import store from './myStore'
+import Vuex from './myStore'
 
-Vue.use(store)
+Vue.use(Vuex)
 
-export default new store({
+export default new Vuex.Store({
   state: {
     num: 0
   },

@@ -16,6 +16,10 @@ class Store {
   get state() {
     return this._vm._data.$$state
   }
+
+  set state(v) {
+    throw new Error('can not set ' + v)
+  }
   commit = (type, payload) => {
     console.log(type, payload)
     this.mutations[type](this.state, payload)
@@ -35,7 +39,7 @@ class Store {
   }
 }
 
-Store.install = _Vue => {
+const install = _Vue => {
   Vue = _Vue
 
   Vue.mixin({
@@ -47,4 +51,4 @@ Store.install = _Vue => {
   })
 }
 
-export default Store
+export default { Store, install }

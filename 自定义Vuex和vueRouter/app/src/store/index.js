@@ -19,5 +19,12 @@ export default new store({
       }, 1000)
     }
   },
-  getters: {}
+  getters: {
+    getNum(state) {
+      return state.num * 2
+    },
+    getNum2(state) {
+      return state.num * 2
+    }
+  }
 })

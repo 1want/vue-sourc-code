@@ -10,6 +10,7 @@ class Store {
     this.mutations = options.mutations
     this.actions = options.actions
     this.getters = {}
+    options.getters && this.handleGetters(options.getters)
   }
 
   get state() {
@@ -22,6 +23,15 @@ class Store {
 
   dispatch = (type, payload) => {
     this.actions[type](this, payload)
+  }
+  handleGetters(getters) {
+    Object.keys(getters).map(key => {
+      Object.defineProperty(this.getters, key, {
+        get: () => {
+          return getters[key](this.state)
+        }
+      })
+    })
   }
 }
 

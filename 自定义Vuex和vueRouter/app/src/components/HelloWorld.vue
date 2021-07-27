@@ -1,9 +1,16 @@
 <template>
-  <div>home</div>
+  <div @click="goAbout">home</div>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    goAbout() {
+      this.$router.push('/about')
+      // console.log(this.$router)
+    }
+  }
+}
 </script>
 
 <style></style>

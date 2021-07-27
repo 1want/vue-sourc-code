@@ -1,9 +1,15 @@
 <template>
-  <div>about</div>
+  <div @click="goHome">about</div>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    goHome() {
+      this.$router.go(-1)
+    }
+  }
+}
 </script>
 
 <style></style>

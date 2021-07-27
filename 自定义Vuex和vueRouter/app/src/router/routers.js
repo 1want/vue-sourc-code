@@ -10,23 +10,43 @@ class Router {
     this.routes = formatRouter(options.routes)
     this.mode = options.mode || 'hash'
     this.current = '/'
+    this.historyRoute = ['/']
     this._init()
   }
   _init() {
     if (this.mode === 'hash') {
       window.addEventListener('hashchange', () => {
         this.current = window.location.hash.slice(1) || '/'
+        this.historyRoute.push(this.current)
       })
     } else {
       window.addEventListener('popstate', () => {
-        this.current = window.location.hash.slice(1)
+        this.current = window.location.hash.slice(1) || '/'
+        this.historyRoute.push(this.current)
       })
     }
+
     Vue.util.defineReactive(this, 'current')
   }
 
-  push() {}
-  go() {}
+  push(path) {
+    this.current = path
+    window.location.hash = '#' + path
+    this.historyRoute.push(this.current)
+  }
+  go(num) {
+    if (!num) {
+      window.location.reload()
+    } else {
+      const res = this.historyRoute.findIndex(e => e === this.current)
+      if (res - Math.abs(-num) >= 0) {
+        this.current = this.historyRoute[res - Math.abs(-num)]
+        window.location.hash = '#' + this.current
+      } else {
+        throw new Error('no route')
+      }
+    }
+  }
 }
 
 Router.install = _Vue => {

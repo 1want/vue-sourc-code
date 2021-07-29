@@ -9,9 +9,9 @@ class Dep {
     this.subs.add(sub)
   }
   depend() {
-    if (Dep.target) {
-      Dep.target.addDep(this)
-    }
+    // if (Dep.target) {
+    Dep.target.addDep(this)
+    // }
   }
 
   notify() {

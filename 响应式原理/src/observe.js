@@ -1,3 +1,5 @@
+// ob 判断当前对象是否已经被劫持
+
 import Observer from './Observes'
 
 let ob

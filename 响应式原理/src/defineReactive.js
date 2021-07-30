@@ -7,26 +7,21 @@ function defineReactive(obj, key, value) {
   }
 
   const dep = new Dep()
-  let c = observe(value)
+  observe(value)
 
   Object.defineProperty(obj, key, {
     enumerable: true,
     configurable: true,
     get() {
       if (Dep.target) {
-        console.log(key + '进入收集依赖')
         dep.depend()
-        if (c) {
-          c.dep.depend()
-        }
       }
       return value
     },
     set(v) {
-      console.log('设置新值阶段')
       if (v === value) return
       value = v
-      c = observe(v)
+      observe(v)
       dep.notify()
     }
   })

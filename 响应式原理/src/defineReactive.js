@@ -7,7 +7,7 @@ function defineReactive(obj, key, value) {
   }
 
   const dep = new Dep()
-  observe(value)
+  let c = observe(value)
 
   Object.defineProperty(obj, key, {
     enumerable: true,
@@ -15,13 +15,16 @@ function defineReactive(obj, key, value) {
     get() {
       if (Dep.target) {
         dep.depend()
+        if (c) {
+          c.dep.depend()
+        }
       }
       return value
     },
     set(v) {
       if (v === value) return
       value = v
-      observe(v)
+      c = observe(v)
       dep.notify()
     }
   })

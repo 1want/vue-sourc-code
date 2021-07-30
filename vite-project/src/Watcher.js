@@ -27,7 +27,7 @@ class Watcher {
   get() {
     Dep.target = this
     const val = this.getter(this.obj)
-    // Dep.target = null
+    Dep.target = null
     return val
   }
 }

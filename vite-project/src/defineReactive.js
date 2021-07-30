@@ -6,14 +6,17 @@ function defineReactive(obj, key, value) {
     value = obj[key]
   }
 
-  observe(value)
   const dep = new Dep()
+  let c = observe(value)
 
   Object.defineProperty(obj, key, {
     get() {
       if (Dep.target) {
         console.log(key + '进入收集依赖')
         dep.depend()
+        if (c) {
+          c.dep.depend()
+        }
       }
       return value
     },

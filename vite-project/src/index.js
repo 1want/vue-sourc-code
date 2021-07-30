@@ -2,14 +2,24 @@ import observe from './observe'
 import Watcher from './Watcher'
 
 const obj = {
-  a: {
-    b: 2
-  }
+  // a: {
+  //   b: 2
+  // }
+  arr: [1, 2, 3]
 }
 
 observe(obj)
 
-new Watcher(obj, 'a.b', (newV, oldV) => {
+new Watcher(obj, 'arr', (newV, oldV) => {
   console.log(newV, oldV)
 })
-obj.a
+
+obj.arr.push(1)
+
+// obj.a
+
+// new Watcher(obj, 'arr', (newV, oldV) => {
+//   console.log(newV, oldV)
+// })
+
+// console.log(obj.arr)
